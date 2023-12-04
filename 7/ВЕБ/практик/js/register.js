@@ -1,5 +1,4 @@
 const buttonOk = document.querySelector("button.register");
-
 const buttonCancel = document.querySelector("button.cancel");
 const form = document.querySelector("form[name=register]");
 
@@ -20,7 +19,6 @@ if (buttonOk) {
                 }
             }
         }
-        console.log(params);
         window.location.replace(`./index.html?${params}`)
     }
 }
