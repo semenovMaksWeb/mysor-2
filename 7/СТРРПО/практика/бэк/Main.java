@@ -4,6 +4,8 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -13,7 +15,7 @@ public class Main {
         server.createContext("/api/user", (exchange -> {
             if ("POST".equals(exchange.getRequestMethod())) {
                 User user = new User();
-                InputStreamReader isr =  new InputStreamReader(exchange.getRequestBody(),"utf-8");
+                InputStreamReader isr =  new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8);
                 BufferedReader br = new BufferedReader(isr);
                 String value = br.readLine();
                 StringTokenizer st1 = new StringTokenizer(value, ";");
@@ -45,6 +47,19 @@ public class Main {
                 System.out.println(user.getStatus());
                 System.out.println(user.getComment());
                 String respText = "Успешно!";
+                BD bd = null;
+                try {
+                    bd = new BD();
+                } catch (SQLException e) {
+                    System.out.println(e.getLocalizedMessage());
+                    throw new RuntimeException(e);
+                }
+                try {
+                    bd.setUser(user);
+                } catch (SQLException e) {
+                    System.out.println(e.getLocalizedMessage());
+                    throw new RuntimeException(e);
+                }
                 exchange.sendResponseHeaders(200, respText.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
                 output.write(respText.getBytes());
