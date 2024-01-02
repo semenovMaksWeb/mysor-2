@@ -1,0 +1,23 @@
+:- initialization(main).
+main :- write('Hello, World!').
+% Факты
+
+gender(man, sport). % М смотрит спорт
+theme(sport, sport). % тематика спорт жанр спорт
+
+gender(man, fantastic). % М смотрит фантастику
+
+gender(woman, drama). % Ж смотрит драму
+theme(sensation, drama). % тематика чувств жанр драма
+
+gender(woman, historical). % Ж смотрит исторические фильмы
+
+age(1, horror) . % нет возрастных ограничений хорроры
+theme(horror, horror). % тематика страха жанр хоррор
+
+age(1, fighters) . % нет возрастных ограничений боевики
+theme(fighters, fighters). % тематика экшен жанр боевики
+
+age(1, western) . % нет возрастных ограничений вестерн
+theme(cowboys, western). % тематика ковбоев жанр вестерн
+% Факты
