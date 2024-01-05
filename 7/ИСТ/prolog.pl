@@ -15,17 +15,5 @@ theme(horror, horror).
 theme(fighters, fighters). 
 theme(western, cowboys).
 
-?- agelimit(X, not) , gender(X, man)
-X = [sport, fantastic]
-
-?- agelimit(X, yes) ; gender(X, man)
-X = [sport, fantastic, horror, fighters, western]
-
-?- agelimit(X, yes) ; gender(X, woman)
-X = [historical, drama, horror, fighters, western]
-
-?- agelimit(X, yes) , theme(X, western).
-X = [western]
-
-?- agelimit(X, not) , theme(X, western).
-X = []
+?- agelimit(X, not) -> write('поиск жанров без возрастных ограничении '), write(X), nl .
+?- agelimit(X, not),  gender(X, man) -> write('поиск жанров без возрастных ограничении для мужщин '), write(X) , nl .
